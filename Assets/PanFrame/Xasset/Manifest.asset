@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7882bd278763c45f49cef7deeae496e5, type: 3}
+  m_Name: Manifest
+  m_EditorClassIdentifier: 
+  activeVariants: []
+  bundles:
+  - demo/scenes
+  - manifest
+  - prefabs/canvas
+  - prefabs/logoscreen
+  - prefabs/uiroot
+  - scenes/loadasset
+  - scenes/loadscene
+  - scenes/test
+  - sprites/blacksquare
+  - sprites/log2
+  - sprites/log3
+  - sprites/unitylogo
+  - sprites/xassetlogo
+  dirs:
+  - Assets
+  - Assets/Demo/Prefabs
+  - Assets/Demo/Scenes
+  - Assets/Demo/Sprites
+  assets:
+  - bundle: 1
+    dir: 0
+    name: Manifest.asset
+  - bundle: 2
+    dir: 1
+    name: Canvas.prefab
+  - bundle: 3
+    dir: 1
+    name: LogoScreen.prefab
+  - bundle: 4
+    dir: 1
+    name: UIRoot.prefab
+  - bundle: 4
+    dir: 1
+    name: UIRoot22.prefab
+  - bundle: 5
+    dir: 2
+    name: LoadAsset.unity
+  - bundle: 6
+    dir: 2
+    name: LoadScene.unity
+  - bundle: 7
+    dir: 2
+    name: Test.unity
+  - bundle: 8
+    dir: 3
+    name: blackSquare.png
+  - bundle: 9
+    dir: 3
+    name: log2.png
+  - bundle: 10
+    dir: 3
+    name: log3.png
+  - bundle: 11
+    dir: 3
+    name: UnityLogo.png
+  - bundle: 12
+    dir: 3
+    name: xassetLogo 1.png
+  - bundle: 12
+    dir: 3
+    name: xassetLogo.png

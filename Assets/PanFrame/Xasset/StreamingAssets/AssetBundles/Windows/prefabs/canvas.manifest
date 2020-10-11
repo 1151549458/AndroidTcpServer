@@ -1,0 +1,41 @@
+ManifestFileVersion: 0
+CRC: 2489941239
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a82d6a83bd8ae9a67bce2d26996ef47a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6a3a20ba1d73eed615ab0130741dba86
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: -98529514, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/Demo/Prefabs/Canvas.prefab
+Dependencies:
+- C:/Users/Administrator/Desktop/xasset-master/AssetBundles/Windows/sprites/blacksquare

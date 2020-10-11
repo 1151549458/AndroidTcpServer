@@ -1,0 +1,8 @@
+﻿2020.0510：学习了凉鞋框架，整体分为01_Extensions和02_Frame。
+2020.0520：添加了一键导出功能，Editor，GameObject和Transform拓展，Mathf。
+2020.0524：添加了单例，简化Mono，简易Event消息机制。
+2020.0525：添加了Config，Xml，Json，Res，DirFile，Byte。 
+2020.0605：添加了DoTween插件和UniRx插件，使得开发更加快节奏。
+2020.0609：添加了简易Xasset框架和AssetBundlesBrowser插件。
+2020.0610：添加了UnityWebRequestTool和DownLoadTools(Editor从服务器下载Tool)的功能，有个小Bug，File会被占用，不过无伤大雅
+2020.0611：在服务器上添加了FishMoveTool。

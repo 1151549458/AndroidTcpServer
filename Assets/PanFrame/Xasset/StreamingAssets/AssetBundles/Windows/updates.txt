@@ -1,0 +1,13 @@
+132361652511851053:
+manifest
+prefabs/canvas
+prefabs/logoscreen
+prefabs/uiroot
+scenes/loadasset
+scenes/loadscene
+scenes/test
+sprites/blacksquare
+sprites/log2
+sprites/log3
+sprites/unitylogo
+sprites/xassetlogo
