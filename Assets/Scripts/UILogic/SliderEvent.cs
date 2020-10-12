@@ -6,16 +6,16 @@ using UnityEngine.EventSystems;
 
 namespace TcpVideo
 {
-    public class SliderEvent : MonoBehaviour, IDragHandler, IEndDragHandler 
+    public class SliderEvent : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         [SerializeField]
         public ToPlayVideo toPlayVideo;        // 视频播放的脚本
 
         private void Start()
         {
-            
+
         }
- 
+
         /// <summary>
         /// 给 Slider 添加开始拖拽事件
         /// </summary>
@@ -31,7 +31,7 @@ namespace TcpVideo
         /// </summary>
         private void SetVideoTimeValueChange()
         {
-            toPlayVideo.videoPlayer.time = toPlayVideo.videoTimeSlider.value * toPlayVideo.videoPlayer.clip.length;
+            toPlayVideo.videoPlayer.time = toPlayVideo.sliderVideoTime.value * toPlayVideo.videoPlayer.clip.length;
         }
 
         /// <summary>
@@ -42,8 +42,9 @@ namespace TcpVideo
         {
             toPlayVideo.videoPlayer.Play();
 
-
+            //向客户端发送事件 
 
         }
 
     }
+}
