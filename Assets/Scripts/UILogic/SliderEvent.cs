@@ -41,7 +41,7 @@ namespace TcpVideo
         public void OnEndDrag(PointerEventData eventData)
         {
             toPlayVideo.videoPlayer.Play();
-
+            MainControl.Instance().SendMsg(toPlayVideo.Name + TcpOrder.orderDrag + toPlayVideo.sliderVideoTime.value);
             //向客户端发送事件 
 
         }

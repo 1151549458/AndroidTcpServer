@@ -11,7 +11,8 @@ namespace TcpVideo
         public int port;
 
         public TcpServer tcpServer;
-         
+
+       // public ToPlayVideo[] toPlayVideos;
         public void StartSever(string _ip,int _port)
         {
             strIp = _ip;
@@ -20,7 +21,11 @@ namespace TcpVideo
         }
 
 
+        public void SendMsg(string str)
+        {
+            tcpServer.SendMsg(str);
 
+        }
 
     }
 }

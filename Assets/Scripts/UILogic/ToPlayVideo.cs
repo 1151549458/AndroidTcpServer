@@ -6,8 +6,12 @@ using UnityEngine.UI;
 using UnityEngine.Video;
 namespace TcpVideo
 {
+    using UniRx;
     public class ToPlayVideo : MonoBehaviour
     {
+        public string Name;
+
+
         public VideoPlayer videoPlayer;
         public Text textVideoTime;          // 视频的当前时间 Text
         public Text textVideoName;          // 视频的总时长 Text
@@ -16,7 +20,7 @@ namespace TcpVideo
         public Button btnStop;            //停止播放按钮
         public Sprite[] spritePlayOrPause; // 0是播放 1是暂停
 
-        private bool isPlay = false;
+        private BoolReactiveProperty isPlay = new BoolReactiveProperty(false);
         private int currentHour;
         private int currentMinute;
         private int currentSecond;
@@ -30,11 +34,42 @@ namespace TcpVideo
             btnStop.onClick.AddListener(StopVideo);
             btnPlayPause.image.sprite = spritePlayOrPause[0];
             ShowVideoLength();
+
+            isPlay.Skip(1).Subscribe(_=> 
+            {
+                if (_)
+                {
+                    btnPlayPause.image.sprite = spritePlayOrPause[1];
+                    videoPlayer.Pause();
+
+                    MainControl.Instance().SendMsg(Name + TcpOrder.orderPause);
+                }
+                else
+                {
+
+                    btnPlayPause.image.sprite = spritePlayOrPause[0];
+                    Debug.Log("Play");
+                    videoPlayer.Play();
+                    MainControl.Instance().SendMsg(Name + TcpOrder.orderPlay);
+                }
+                
+            });
+            this.Delay(0.5f,()=> {
+                 isPlay.Value = true;
+
+            });
+            //Observable.NextFrame().Subscribe((_) => {
+            //}); ;
+
+
         }
+
+
+
 
         private void Update()
         {
-            if (!isPlay) return; 
+            if (isPlay.Value) return; 
             ShowVideoTime();
         }
 
@@ -72,7 +107,6 @@ namespace TcpVideo
         void ShowVideoLength()
         {
       
-            videoPlayer.Play();
             sliderVideoTime.gameObject.SetActive(true);
             clipHour = (int)videoPlayer.clip.length / 3600;
             clipMinute = (int)(videoPlayer.clip.length - clipHour * 3600) / 60;
@@ -86,23 +120,14 @@ namespace TcpVideo
         void PlayOrPause()
         {
             //如果视频片段不为空，并且视频画面没有播放完毕
+            Debug.Log((ulong)videoPlayer.frame);
+            Debug.Log(videoPlayer.frameCount);
+
             if (videoPlayer.clip != null && (ulong)videoPlayer.frame < videoPlayer.frameCount)
             {
 
                 sliderVideoTime.gameObject.SetActive(true);
-                //如果视频正在播放
-                if (isPlay)
-                {
-                    btnPlayPause.image.sprite = spritePlayOrPause[1];
-                    videoPlayer.Pause();
-                    isPlay = false;
-                }
-                else
-                {
-                    btnPlayPause.image.sprite = spritePlayOrPause[0];
-                    videoPlayer.Play();
-                    isPlay = true;
-                }
+                isPlay.Value = !isPlay.Value; 
             }
         }
         void StopVideo()
@@ -112,7 +137,8 @@ namespace TcpVideo
             sliderVideoTime.gameObject.SetActive(false);
             textVideoName.text = "";
             textVideoTime.text = "";
-            isPlay = true;
+            isPlay.Value = true;
+            MainControl.Instance().SendMsg(Name + TcpOrder.orderStop);
         }
 
     }

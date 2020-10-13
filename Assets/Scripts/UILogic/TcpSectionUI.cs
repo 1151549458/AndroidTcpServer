@@ -28,8 +28,8 @@ namespace TcpVideo
         }
         void SetNormal()
         {
-            inputFieldIp.text = "192.168.1.1";
-            InputFieldPort.text = "8888";
+            inputFieldIp.text = "192.168.31.46";
+            InputFieldPort.text = "9999";
         }
         void InitSever()
         {

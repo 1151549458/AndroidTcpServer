@@ -81,6 +81,9 @@ namespace TcpVideo
                 }
                 //////////到这里就可以接收到字符串了//////////////////////////
                 string str = Encoding.Default.GetString(buffer, 0, len);
+
+
+
                 Debug.Log("服务器打印：" + socketSend.RemoteEndPoint + ":" + str);
             }
         }
