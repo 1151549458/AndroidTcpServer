@@ -77,8 +77,7 @@ namespace TcpVideo
                     break;
                 default:
                     break;
-            }
- 
+            } 
         }
 
         public static float GetDragValue(string s)

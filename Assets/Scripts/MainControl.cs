@@ -11,8 +11,7 @@ namespace TcpVideo
         public int port;
 
         public TcpServer tcpServer;
-
-
+         
         public void StartSever(string _ip,int _port)
         {
             strIp = _ip;
