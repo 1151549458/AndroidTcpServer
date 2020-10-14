@@ -18,9 +18,9 @@ namespace TcpVideo
         public Slider sliderVideoTime;      // 视频的时间 Slider
         public Button btnPlayPause;       //播放暂停按钮
         public Button btnStop;            //停止播放按钮
-        public Sprite[] spritePlayOrPause; // 0是播放 1是暂停
+        public Sprite[] spritePlayOrPause; // 0是暂停 1是播放
 
-        private BoolReactiveProperty isPlay = new BoolReactiveProperty(false);
+        private BoolReactiveProperty isPlay = new BoolReactiveProperty(true);
         private int currentHour;
         private int currentMinute;
         private int currentSecond;
@@ -32,11 +32,12 @@ namespace TcpVideo
         {
             btnPlayPause.onClick.AddListener(PlayOrPause);
             btnStop.onClick.AddListener(StopVideo);
-            btnPlayPause.image.sprite = spritePlayOrPause[0];
+            btnPlayPause.image.sprite = spritePlayOrPause[1];
             ShowVideoLength();
 
             isPlay.Skip(1).Subscribe(_=> 
             {
+                Debug.Log(isPlay.Value);
                 if (_)
                 {
                     btnPlayPause.image.sprite = spritePlayOrPause[1];
@@ -52,16 +53,13 @@ namespace TcpVideo
                     videoPlayer.Play();
                     MainControl.Instance().SendMsg(Name + TcpOrder.orderPlay);
                 }
-                
-            });
-            this.Delay(0.5f,()=> {
-                 isPlay.Value = true;
 
             });
+
             //Observable.NextFrame().Subscribe((_) => {
             //}); ;
 
-
+            videoPlayer.frame = 1;
         }
 
 
@@ -123,7 +121,7 @@ namespace TcpVideo
             Debug.Log((ulong)videoPlayer.frame);
             Debug.Log(videoPlayer.frameCount);
 
-            if (videoPlayer.clip != null && (ulong)videoPlayer.frame < videoPlayer.frameCount)
+            if (videoPlayer.clip != null )
             {
 
                 sliderVideoTime.gameObject.SetActive(true);
