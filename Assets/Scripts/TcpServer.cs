@@ -7,11 +7,16 @@ using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using System;
-
+using UniRx;
 namespace TcpVideo
 {
     public class TcpServer : MonoSingleton<TcpServer>
-    { 
+    {
+        public BoolReactiveProperty IsContent = new BoolReactiveProperty(false);
+
+        public Action CallTcpSuccess01 = null;
+        public Action CallTcpSuccess02 = null;
+        public Action CallTcpSuccess03 = null;
         //存储和客户端通讯的套接字
         private List<Socket> socConnections = new List<Socket>();
         private List<Thread> dictThread = new List<Thread>();
@@ -35,6 +40,7 @@ namespace TcpVideo
                 thread.IsBackground = true;
                 thread.Start(socketWatch);
                 _thread = thread;
+                IsContent.Value = true;
             }
             catch (Exception)
             {
@@ -82,7 +88,7 @@ namespace TcpVideo
                 //////////到这里就可以接收到字符串了//////////////////////////
                 string str = Encoding.Default.GetString(buffer, 0, len);
 
-
+                ParseHead(str);
 
                 Debug.Log("服务器打印：" + socketSend.RemoteEndPoint + ":" + str);
             }
@@ -95,7 +101,30 @@ namespace TcpVideo
                 bt_send_Click(socConnections[i],str);
             }
         }
-         
+
+
+        public void ParseHead(string strMsg)
+        {
+            string[] arrayMsg = strMsg.Split('|');
+            //判断自己的名字是否正确
+            switch (arrayMsg[0])
+            {
+                case "window01":
+                    CallTcpSuccess01?.Invoke();
+                    break;
+                case "window02":
+                    CallTcpSuccess02?.Invoke(); 
+                    break;
+                case "HHC-NET2D":
+                    CallTcpSuccess03?.Invoke();
+                    break;
+
+                default:
+
+                    break;
+            }
+
+        }
         private void bt_send_Click(Socket socket, string str)
         {
             try

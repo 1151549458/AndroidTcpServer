@@ -11,7 +11,7 @@ namespace TcpVideo
         public Button btnContent;
         public InputField inputFieldIp;
         public InputField InputFieldPort;
-        public Button btnNext;
+        public Toggle toggle;
         private string strIP = string.Empty;
         private int port;
         void Start()
@@ -21,9 +21,7 @@ namespace TcpVideo
                 InitSever();
           
             });
-            btnNext.onClick.AddListener(()=> {
-                InitSever();
-            });
+         
             SetNormal();
         }
         void SetNormal()
@@ -35,6 +33,10 @@ namespace TcpVideo
         {
             string ip = inputFieldIp.text;
             string port = InputFieldPort.text;
+
+
+            MainControl.Instance().xmlInfo.SetIpPortInfo(ip, port,toggle.isOn);
+
             MainControl.Instance().StartSever(ip, Convert.ToInt32(port));
             gameObject.Hide();
         }

@@ -10,6 +10,8 @@ namespace TcpVideo
     public class ToPlayVideo : MonoBehaviour
     {
         public string Name;
+        public Text textDialog;
+        public Text textJidianqi;
 
 
         public VideoPlayer videoPlayer;
@@ -34,7 +36,7 @@ namespace TcpVideo
             btnStop.onClick.AddListener(StopVideo);
             btnPlayPause.image.sprite = spritePlayOrPause[1];
             ShowVideoLength();
-
+            textVideoTime.text = "";
             isPlay.Skip(1).Subscribe(_=> 
             {
                 Debug.Log(isPlay.Value);
@@ -56,10 +58,24 @@ namespace TcpVideo
 
             });
 
+            MainControl.Instance().tcpServer.CallTcpSuccess01 += () => {
+                ThreadHelperTool.QueueOnMainThread(()=> {
+                    SetDialog(true);
+
+                });
+            };
+            MainControl.Instance().tcpServer.CallTcpSuccess03 += () => {
+                ThreadHelperTool.QueueOnMainThread(() => {
+                    textJidianqi.text = "继电器连接成功";
+
+                });
+            };
+
             //Observable.NextFrame().Subscribe((_) => {
             //}); ;
 
             videoPlayer.frame = 1;
+            SetDialog(false);
         }
 
 
@@ -123,7 +139,7 @@ namespace TcpVideo
 
             if (videoPlayer.clip != null )
             {
-
+                textVideoName.gameObject.Show();
                 sliderVideoTime.gameObject.SetActive(true);
                 isPlay.Value = !isPlay.Value; 
             }
@@ -133,11 +149,26 @@ namespace TcpVideo
             videoPlayer.Stop();
             btnPlayPause.image.sprite = spritePlayOrPause[0]; 
             sliderVideoTime.gameObject.SetActive(false);
-            textVideoName.text = "";
+            textVideoName.gameObject.Hide() ;
             textVideoTime.text = "";
             isPlay.Value = true;
             MainControl.Instance().SendMsg(Name + TcpOrder.orderStop);
         }
+
+        public void SetDialog(bool b)
+        {
+            if (b)
+            {
+                textDialog.text = Name + "监听成功";
+            }
+            else
+            {
+                textDialog.text = Name + "等待监听";
+
+            }
+        }
+
+
 
     }
 }

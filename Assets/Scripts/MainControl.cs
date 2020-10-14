@@ -11,7 +11,7 @@ namespace TcpVideo
         public int port;
 
         public TcpServer tcpServer;
-
+        public XmlInfo xmlInfo;
        // public ToPlayVideo[] toPlayVideos;
         public void StartSever(string _ip,int _port)
         {
