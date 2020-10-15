@@ -42,9 +42,10 @@ namespace TcpVideo
 
         public void ParseHead(string strMsg)
         {
-            string[] arrayMsg = strMsg.Split('|');
+            string[] arrayMsg = strMsg.Split('=');
+            string head = arrayMsg[0].Trim('"');
             //判断自己的名字是否正确
-            switch (arrayMsg[0])
+            switch (head)
             {
                 case "window01":
 
@@ -53,6 +54,10 @@ namespace TcpVideo
                 case "window02":
                     ParesMsg(arrayMsg[1]);
                     break;
+                case "HHC-NET2D":
+                    Debug.Log("继电器");
+                    break;
+
                 default:
 
                     break;

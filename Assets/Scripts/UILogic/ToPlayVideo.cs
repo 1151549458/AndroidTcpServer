@@ -10,9 +10,7 @@ namespace TcpVideo
     public class ToPlayVideo : MonoBehaviour
     {
         public string Name;
-        public Text textDialog;
-        public Text textJidianqi;
-
+        public Text textDialog; 
 
         public VideoPlayer videoPlayer;
         public Text textVideoTime;          // 视频的当前时间 Text
@@ -21,6 +19,8 @@ namespace TcpVideo
         public Button btnPlayPause;       //播放暂停按钮
         public Button btnStop;            //停止播放按钮
         public Sprite[] spritePlayOrPause; // 0是暂停 1是播放
+
+        public bool is01 = false;
 
         private BoolReactiveProperty isPlay = new BoolReactiveProperty(true);
         private int currentHour;
@@ -48,8 +48,7 @@ namespace TcpVideo
                     MainControl.Instance().SendMsg(Name + TcpOrder.orderPause);
                 }
                 else
-                {
-
+                { 
                     btnPlayPause.image.sprite = spritePlayOrPause[0];
                     Debug.Log("Play");
                     videoPlayer.Play();
@@ -57,19 +56,24 @@ namespace TcpVideo
                 }
 
             });
+            if (is01)
+            {
+                MainControl.Instance().tcpServer.CallTcpSuccess01 += () => {
+                    ThreadHelperTool.QueueOnMainThread(() => {
+                        SetDialog(true);
+                    });
+                };
+            }
+            else
+            {
+                MainControl.Instance().tcpServer.CallTcpSuccess02 += () => {
+                    ThreadHelperTool.QueueOnMainThread(() => {
+                        SetDialog(true);
+                    });
+                };
+            }
 
-            MainControl.Instance().tcpServer.CallTcpSuccess01 += () => {
-                ThreadHelperTool.QueueOnMainThread(()=> {
-                    SetDialog(true);
-
-                });
-            };
-            MainControl.Instance().tcpServer.CallTcpSuccess03 += () => {
-                ThreadHelperTool.QueueOnMainThread(() => {
-                    textJidianqi.text = "继电器连接成功";
-
-                });
-            };
+       
 
             //Observable.NextFrame().Subscribe((_) => {
             //}); ;

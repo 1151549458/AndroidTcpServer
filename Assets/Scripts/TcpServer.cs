@@ -105,20 +105,20 @@ namespace TcpVideo
 
         public void ParseHead(string strMsg)
         {
-            string[] arrayMsg = strMsg.Split('|');
+            string[] arrayMsg = strMsg.Split('='); 
+            string head = arrayMsg[0].Trim('"');
             //判断自己的名字是否正确
-            switch (arrayMsg[0])
+            switch (head)
             {
                 case "window01":
                     CallTcpSuccess01?.Invoke();
                     break;
                 case "window02":
-                    CallTcpSuccess02?.Invoke(); 
+                    CallTcpSuccess02?.Invoke();
                     break;
                 case "HHC-NET2D":
-                    CallTcpSuccess03?.Invoke();
-                    break;
-
+                    CallTcpSuccess03?.Invoke();   
+                    break; 
                 default:
 
                     break;

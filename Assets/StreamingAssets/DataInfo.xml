@@ -1,3 +1,3 @@
 <Root>
-  <SocketInfo VpIp="192.168.31.46" VpPort="9999" VpToggle="True" />
+  <SocketInfo VpIp="192.168.31.46" VpPort="9999" VpToggle="False" />
 </Root>
