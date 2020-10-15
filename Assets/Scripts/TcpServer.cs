@@ -101,12 +101,11 @@ namespace TcpVideo
                 bt_send_Click(socConnections[i],str);
             }
         }
-
-
+         
         public void ParseHead(string strMsg)
         {
             string[] arrayMsg = strMsg.Split('='); 
-            string head = arrayMsg[0].Trim('"');
+            string head = arrayMsg[1].Trim('"');
             //判断自己的名字是否正确
             switch (head)
             {

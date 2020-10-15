@@ -22,7 +22,7 @@ namespace TcpVideo
 
         public bool is01 = false;
 
-        private BoolReactiveProperty isPlay = new BoolReactiveProperty(true);
+        public BoolReactiveProperty isPlay = new BoolReactiveProperty(true);
         private int currentHour;
         private int currentMinute;
         private int currentSecond;
